@@ -107,8 +107,8 @@ This one is easy, it's just an integer.
 __Example:__
 
 ```ruby
-token :length => 6 # Tokens are now of length 6
-token :length => 12 # Whow, whow, whow. Slow down egghead.
+token length: 8  # Tokens are now of length 8
+token length: 12 # Whow, whow, whow. Slow down egghead.
 ```
 
 You get the idea.
@@ -133,8 +133,8 @@ never start with zeros
 
 __Examples:__
 ```ruby
-token :contains => :alpha_upper, :length => 8
-token :contains => :fixed_numeric
+token contains: :alpha_upper, length: 8
+token contains: :fixed_numeric
 ```
 
 #### Patterns (`:pattern`)
@@ -162,7 +162,7 @@ generated character, and are as follows:
 __Example:__
 
 ```ruby
-token :pattern => "PRE-%C%C-%d%d%d%d" # Generates something like: 'PRE-ND-3485'
+token pattern: "PRE-%C%C-%d%d%d%d" # Generates something like: 'PRE-ND-3485'
 ```
 
 You can also add a repetition modifier, which can help improve readability on
@@ -171,7 +171,7 @@ more complex patterns. You simply add any integer after the letter.
 __Examples:__
 
 ```ruby
-token :pattern => "APP-%d6" # Generates something like; "APP-638924"
+token pattern: "APP-%d6" # Generates something like; "APP-638924"
 ```
 
 ### Field Name
@@ -181,8 +181,8 @@ This is particularly handy to use multiple tokens one a single document.
 
 __Examples:__
 ```ruby
-token :length => 6
-token :sharing_token, :length => 12
+token length: 6
+token :sharing_token, length: 12
 token :yet_another
 ```
 
@@ -194,7 +194,7 @@ overrides for the default `find` behaviour used by Mongoid.
 
 __Example:__
 ```ruby
-token :skip_finders => true
+token skip_finders: true
 ```
 
 
@@ -206,7 +206,7 @@ this behaviour off:
 
 __Example:__
 ```ruby
-token :override_to_param => false
+token override_to_param: false
 ```
 
 
@@ -219,8 +219,8 @@ option is for you.
 
 __Examples:__
 ```ruby
-token :retry_count => 9
-token :retry_count => 0
+token retry_count: 9
+token retry_count: 0
 ```
 
 # Notes
