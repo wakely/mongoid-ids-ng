@@ -1,9 +1,18 @@
-# Mongoid::Ids - Short snappy ids/tokens for Mongoid documents
-
-[![Build Status](https://secure.travis-ci.org/nofxx/mongoid-ids.png)](http://travis-ci.org/nofxx/mongoid-ids)
+# Mongoid::Ids
 [![Code Climate](https://codeclimate.com/github/nofxx/mongoid-ids.png)](https://codeclimate.com/github/nofxx/mongoid-ids)
+[![Dependency Status](https://gemnasium.com/nofxx/mongoid-ids.svg)](https://gemnasium.com/nofxx/mongoid-ids)
+[![Build Status](https://secure.travis-ci.org/nofxx/mongoid-ids.png)](http://travis-ci.org/nofxx/mongoid-ids)
 
-This library is a quick and simple way to generate unique, random tokens
+## Mongoid::Token || Mongoid::Ids
+
+This gem is a fork that changes the default behaviour of original
+Mongoid::Token: instead of custom fields it changes _id by default.
+But you may still use tokens on custom fields.
+
+
+## Short snappy tokens for Mongoid documents
+
+This library is a quick and simple way to generate unique, random ids
 for your mongoid documents, in the cases where you can't, or don't want
 to use slugs, or the default MongoDB ObjectIDs.
 
@@ -20,11 +29,7 @@ Into something more like this:
 
 In your gemfile, add:
 
-    gem 'mongoid-ids', '~> 2.0.0'
-
-Then update your bundle
-
-    $ bundle update
+    gem 'mongoid-ids'
 
 In your Mongoid documents, just add `include Mongoid::Ids` and the
 `token` method will take care of all the setup, like so:
@@ -45,7 +50,24 @@ And that's it! There's lots of configuration options too - which are all
 listed [below](#configuration). By default, the `token` method will
 create tokens 4 characters long, containing random alphanumeric characters.
 
-__Note:__ Mongoid::Ids leverages Mongoid's 'safe mode' by
+## Custom/Extra fields
+
+
+```ruby
+class Person
+  include Mongoid::Document
+  include Mongoid::Ids
+
+  field :name
+
+  token :code
+  token :token
+  token :other_code
+end
+
+```
+
+__Note on custom field:__ Mongoid::Ids leverages Mongoid's 'safe mode' by
 automatically creating a unique index on your documents using the token
 field. In order to take advantage of this feature (and ensure that your
 documents always have unique tokens) remember to create your indexes.
@@ -53,32 +75,30 @@ documents always have unique tokens) remember to create your indexes.
 
 ## Finders
 
-By default, the gem will override the existing `find` method in Mongoid,
-in order to search for documents based on their token first (although
-the default behaviour of ObjectIDs is also there). You can disable these
-with the [`skip_finders` configuration option](#skip-finders-skip_finders).
+By default, the gem will **never** override the existing `find`.
+There's some helpers for custom fields::
 
 ```ruby
-Video.find("x3v98")
-Account.find("ACC-123456")
+Video.find_by_code("x3v98")
+Account.find_by_token("ACC-123456")
 ```
+
+You can disable these with the
+[`skip_finders` configuration option](#skip-finders-skip_finders).
 
 
 ## Configuration
 
-### Idss
+You may choose between two different systems for how your tokens look:
 
-As of `Mongoid::Ids` 2.0.0, you can now choose between two different
-systems for managing how your tokens look.
-
-For simple setup, you can use
-combination of the [`length`](#length-length) and [`contains`](#contains-contains), which modify the length and
-types of characters to use.
+For simple setup, you can use combination of the
+[`length`](#length-length) and [`contains`](#contains-contains),
+which modify the length and types of characters to use.
 
 For when you need to generate more complex tokens, you can use the
-[`pattern`](#patterns-pattern) option, which allows for very low-level control of the precise
-structure of your tokens, as well as allowing for static strings, like
-prefixes, infixes or suffixes.
+[`pattern`](#patterns-pattern) option, which allows for very low-level
+control of the precise structure of your tokens, as well as allowing
+for static strings, like prefixes, infixes or suffixes.
 
 #### Length (`:length`)
 
@@ -119,11 +139,10 @@ token :contains => :fixed_numeric
 
 #### Patterns (`:pattern`)
 
-New in 2.0.0, patterns allow you fine-grained control over how your
-tokens look. It's great for generating random data that has a
-requirements to also have some basic structure. If you use the
-`:pattern` option, it will override both the `:length` and `:contains`
-options.
+Patterns allow you fine-grained control over how your tokens look.
+It's great for generating random data that has a requirements to
+also have some basic structure. If you use the `:pattern` option,
+it will override both the `:length` and `:contains` options.
 
 This was designed to operate in a similar way to something like `strftime`,
 if the syntax offends you - please open an issue, I'd love to get some
@@ -206,6 +225,11 @@ token :retry_count => 0
 
 # Notes
 
+This gem just changes the Mongoid::Token behaviour, use it if you don't
+need to change ids:
+
+http://github.com/thetron/mongoid_token
+
 If you find a problem, please [submit an issue](http://github.com/nofxx/mongoid-ids/issues) (and a failing test, if
 you can). Pull requests and feature requests are always welcome and
 greatly appreciated.
@@ -214,7 +238,7 @@ Thanks to everyone that has contributed to this gem over the past year.
 Many, many thanks - you guys rawk.
 
 
-## Contributors:
+## Mongoid::Token Contributors:
 
 Thanks to everyone who has provided support for this gem over the years.
 In particular: [olliem](https://github.com/olliem),
