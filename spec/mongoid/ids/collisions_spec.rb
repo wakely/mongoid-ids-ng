@@ -1,15 +1,15 @@
-require File.join(File.dirname(__FILE__), %w[.. .. spec_helper])
+require 'spec_helper'
 
-describe Mongoid::Token::Collisions do
+describe Mongoid::Ids::Collisions do
   let(:document) { Object.new }
   describe "#resolve_token_collisions" do
     context "when there is a duplicate token" do
-      let(:resolver) { double("Mongoid::Token::CollisionResolver") }
+      let(:resolver) { double("Mongoid::Ids::CollisionResolver") }
 
       before(:each) do
         allow(resolver).to receive(:field_name).and_return(:token)
         allow(resolver).to receive(:create_new_token_for){|doc|}
-        document.class.send(:include, Mongoid::Token::Collisions)
+        document.class.send(:include, Mongoid::Ids::Collisions)
         allow(document).to receive(:is_duplicate_token_error?).and_return(true)
       end
 
@@ -17,7 +17,7 @@ describe Mongoid::Token::Collisions do
         it "should raise an error after the first try" do
           allow(resolver).to receive(:retry_count).and_return(0)
           attempts = 0
-          expect{document.resolve_token_collisions(resolver) { attempts += 1; raise Moped::Errors::OperationFailure.new("","") }}.to raise_error Mongoid::Token::CollisionRetriesExceeded
+          expect{document.resolve_token_collisions(resolver) { attempts += 1; raise Moped::Errors::OperationFailure.new("","") }}.to raise_error Mongoid::Ids::CollisionRetriesExceeded
           expect(attempts).to eq 1
         end
       end
@@ -26,7 +26,7 @@ describe Mongoid::Token::Collisions do
         it "should raise an error after retrying once" do
           allow(resolver).to receive(:retry_count).and_return(1)
           attempts = 0
-          expect{document.resolve_token_collisions(resolver) { attempts += 1; raise Moped::Errors::OperationFailure.new("","") }}.to raise_error Mongoid::Token::CollisionRetriesExceeded
+          expect{document.resolve_token_collisions(resolver) { attempts += 1; raise Moped::Errors::OperationFailure.new("","") }}.to raise_error Mongoid::Ids::CollisionRetriesExceeded
           expect(attempts).to eq 2
         end
       end
@@ -35,7 +35,7 @@ describe Mongoid::Token::Collisions do
         it "should raise an error after retrying" do
           allow(resolver).to receive(:retry_count).and_return(3)
           attempts = 0
-          expect{document.resolve_token_collisions(resolver) { attempts += 1; raise Moped::Errors::OperationFailure.new("","") }}.to raise_error Mongoid::Token::CollisionRetriesExceeded
+          expect{document.resolve_token_collisions(resolver) { attempts += 1; raise Moped::Errors::OperationFailure.new("","") }}.to raise_error Mongoid::Ids::CollisionRetriesExceeded
           expect(attempts).to eq 4
         end
       end
@@ -53,7 +53,7 @@ describe Mongoid::Token::Collisions do
 
   describe "#raise_collision_retries_exceeded_error" do
     before(:each) do
-      document.class.send(:include, Mongoid::Token::Collisions)
+      document.class.send(:include, Mongoid::Ids::Collisions)
     end
 
     it "should warn the rails logger" do
@@ -73,13 +73,14 @@ describe Mongoid::Token::Collisions do
     end
 
     it "should raise an error" do
-      expect{ document.raise_collision_retries_exceeded_error(:token, 3) }.to raise_error(Mongoid::Token::CollisionRetriesExceeded)
+      expect{ document.raise_collision_retries_exceeded_error(:token, 3) }
+        .to raise_error(Mongoid::Ids::CollisionRetriesExceeded)
     end
   end
 
   describe "#is_duplicate_token_error?" do
     before(:each) do
-      document.class.send(:include, Mongoid::Token::Collisions)
+      document.class.send(:include, Mongoid::Ids::Collisions)
     end
     context "when there is a duplicate key error" do
       it "should return true" do
@@ -87,7 +88,7 @@ describe Mongoid::Token::Collisions do
         err = double("Moped::Errors::OperationFailure")
         allow(err).to receive("details") do
           {
-            "err" => "E11000 duplicate key error index: mongoid_token_test.links.$token_1  dup key: { : \"tokenvalue123\" }",
+            "err" => "E11000 duplicate key error index: mongoid_ids_test.links.$token_1  dup key: { : \"tokenvalue123\" }",
             "code" => 11000,
             "n" => 0,
             "connectionId" => 130,
