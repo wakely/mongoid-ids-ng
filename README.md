@@ -71,12 +71,13 @@ __Note on custom field:__ Mongoid::Ids leverages Mongoid's 'safe mode' by
 automatically creating a unique index on your documents using the token
 field. In order to take advantage of this feature (and ensure that your
 documents always have unique tokens) remember to create your indexes.
+Also, `Mongoid::Ids` will never override `to_param`.
 
 
 ## Finders
 
-By default, the gem will **never** override the existing `find`.
-There's some helpers for custom fields::
+`Mongoid::Ids` will **never** override `find`.
+There's some helpers for custom fields:
 
 ```ruby
 Video.find_by_code("x3v98")
@@ -195,18 +196,6 @@ overrides for the default `find` behaviour used by Mongoid.
 __Example:__
 ```ruby
 token skip_finders: true
-```
-
-
-### Override to_param (`:override_to_param`)
-
-By default, `Mongoid::Ids` will override to_param, to make it an easy
-drop-in replacement for the default ObjectIDs. If needed, you can turn
-this behaviour off:
-
-__Example:__
-```ruby
-token override_to_param: false
 ```
 
 
