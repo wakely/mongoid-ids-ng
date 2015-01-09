@@ -1,5 +1,5 @@
 module Mongoid
-  module Token
+  module Ids
     module Collisions
       def resolve_token_collisions(resolver)
         retries = resolver.retry_count
@@ -19,8 +19,8 @@ module Mongoid
       end
 
       def raise_collision_retries_exceeded_error(field_name, retry_count)
-        Rails.logger.warn "[Mongoid::Token] Warning: Maximum token generation retries (#{retry_count}) exceeded on `#{field_name}'." if defined?(Rails)
-        raise Mongoid::Token::CollisionRetriesExceeded.new(self, retry_count)
+        Rails.logger.warn "[Mongoid::Ids] Warning: Maximum token generation retries (#{retry_count}) exceeded on `#{field_name}'." if defined?(Rails)
+        raise Mongoid::Ids::CollisionRetriesExceeded.new(self, retry_count)
       end
 
       def is_duplicate_token_error?(err, document, field_name)

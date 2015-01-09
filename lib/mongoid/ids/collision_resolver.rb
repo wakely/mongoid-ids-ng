@@ -1,7 +1,7 @@
-require 'mongoid/token/collisions'
+require 'mongoid/ids/collisions'
 
 module Mongoid
-  module Token
+  module Ids
     class CollisionResolver
       attr_accessor :create_new_token
       attr_reader :klass
@@ -13,7 +13,7 @@ module Mongoid
         @klass = klass
         @field_name = field_name
         @retry_count = retry_count
-        klass.send(:include, Mongoid::Token::Collisions)
+        klass.send(:include, Mongoid::Ids::Collisions)
         alias_method_with_collision_resolution(:insert)
         alias_method_with_collision_resolution(:upsert)
       end

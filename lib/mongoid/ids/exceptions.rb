@@ -1,5 +1,5 @@
 module Mongoid
-  module Token
+  module Ids
     class Error < StandardError; end
 
     class CollisionRetriesExceeded < Error

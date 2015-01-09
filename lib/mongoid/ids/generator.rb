@@ -10,7 +10,7 @@
 # Any pattern can be followed by a number, representing how many of that type to generate
 
 module Mongoid
-  module Token
+  module Ids
     module Generator
       REPLACE_PATTERN = /%((?<character>[cCdDpsw]{1})(?<length>\d+(,\d+)?)?)/
 
