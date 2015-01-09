@@ -1,13 +1,13 @@
-# Mongoid::Token - Short snappy tokens for Mongoid documents
+# Mongoid::Ids - Short snappy ids/tokens for Mongoid documents
 
-[![Build Status](https://secure.travis-ci.org/thetron/mongoid_token.png)](http://travis-ci.org/thetron/mongoid_token)
-[![Code Climate](https://codeclimate.com/github/thetron/mongoid_token.png)](https://codeclimate.com/github/thetron/mongoid_token)
+[![Build Status](https://secure.travis-ci.org/nofxx/mongoid-ids.png)](http://travis-ci.org/nofxx/mongoid-ids)
+[![Code Climate](https://codeclimate.com/github/nofxx/mongoid-ids.png)](https://codeclimate.com/github/nofxx/mongoid-ids)
 
 This library is a quick and simple way to generate unique, random tokens
 for your mongoid documents, in the cases where you can't, or don't want
 to use slugs, or the default MongoDB ObjectIDs.
 
-Mongoid::Token can help turn this:
+Mongoid::Ids can help turn this:
 
     http://bestappever.com/video/4dcfbb3c6a4f1d4c4a000012
 
@@ -20,19 +20,19 @@ Into something more like this:
 
 In your gemfile, add:
 
-    gem 'mongoid_token', '~> 2.0.0'
+    gem 'mongoid-ids', '~> 2.0.0'
 
 Then update your bundle
 
     $ bundle update
 
-In your Mongoid documents, just add `include Mongoid::Token` and the
+In your Mongoid documents, just add `include Mongoid::Ids` and the
 `token` method will take care of all the setup, like so:
 
 ```ruby
 class Person
   include Mongoid::Document
-  include Mongoid::Token
+  include Mongoid::Ids
 
   field :name
 
@@ -45,7 +45,7 @@ And that's it! There's lots of configuration options too - which are all
 listed [below](#configuration). By default, the `token` method will
 create tokens 4 characters long, containing random alphanumeric characters.
 
-__Note:__ Mongoid::Token leverages Mongoid's 'safe mode' by
+__Note:__ Mongoid::Ids leverages Mongoid's 'safe mode' by
 automatically creating a unique index on your documents using the token
 field. In order to take advantage of this feature (and ensure that your
 documents always have unique tokens) remember to create your indexes.
@@ -66,9 +66,9 @@ Account.find("ACC-123456")
 
 ## Configuration
 
-### Tokens
+### Idss
 
-As of `Mongoid::Token` 2.0.0, you can now choose between two different
+As of `Mongoid::Ids` 2.0.0, you can now choose between two different
 systems for managing how your tokens look.
 
 For simple setup, you can use
@@ -155,17 +155,16 @@ __Examples:__
 token :pattern => "APP-%d6" # Generates something like; "APP-638924"
 ```
 
-### Field Name (`:field_name`)
+### Field Name
 
-This allows you to change the field name used by `Mongoid::Token`
-(default is `:token`). This is particularly handy when you're wanting to
-use multiple tokens one a single document.
+This allows you to change the field name used by `Mongoid::Ids`
+This is particularly handy to use multiple tokens one a single document.
 
 __Examples:__
 ```ruby
 token :length => 6
-token :field_name => :sharing_token, :length => 12
-token :field_name => :yet_another
+token :sharing_token, :length => 12
+token :yet_another
 ```
 
 
@@ -182,7 +181,7 @@ token :skip_finders => true
 
 ### Override to_param (`:override_to_param`)
 
-By default, `Mongoid::Token` will override to_param, to make it an easy
+By default, `Mongoid::Ids` will override to_param, to make it an easy
 drop-in replacement for the default ObjectIDs. If needed, you can turn
 this behaviour off:
 
@@ -195,7 +194,7 @@ token :override_to_param => false
 ### Retry Count (`:retry_count`)
 
 In the event of a token collision, this gem will attempt to try three
-more times before raising a `Mongoid::Token::CollisionRetriesExceeded`
+more times before raising a `Mongoid::Ids::CollisionRetriesExceeded`
 error. If you're wanting it to try harder, or less hard, then this
 option is for you.
 
@@ -207,7 +206,7 @@ token :retry_count => 0
 
 # Notes
 
-If you find a problem, please [submit an issue](http://github.com/thetron/mongoid_token/issues) (and a failing test, if
+If you find a problem, please [submit an issue](http://github.com/nofxx/mongoid-ids/issues) (and a failing test, if
 you can). Pull requests and feature requests are always welcome and
 greatly appreciated.
 
