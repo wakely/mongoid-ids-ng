@@ -50,17 +50,6 @@ describe Mongoid::Ids::Options do
     expect(Mongoid::Ids::Options.new.pattern).to eq('%s4')
   end
 
-  describe 'override_to_param' do
-    it 'should be an option' do
-      expect(Mongoid::Ids::Options.new(override_to_param: false)
-              .override_to_param?).to eq false
-    end
-
-    it 'should default to true' do
-      expect(Mongoid::Ids::Options.new.override_to_param?).to eq true
-    end
-  end
-
   describe 'skip_finder' do
     it 'should be an option' do
       expect(Mongoid::Ids::Options.new(skip_finders: true)

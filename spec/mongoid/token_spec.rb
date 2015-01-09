@@ -283,9 +283,9 @@ describe Mongoid::Ids do
   end
 
   describe '.to_param' do
-    it 'should return the token' do
+    it 'should be removed from this gem' do
       document_class.send(:token, :token)
-      expect(document.to_param).to eq document.token
+      expect(document.to_param).to eq document.id.to_s # why to_s?
     end
   end
 

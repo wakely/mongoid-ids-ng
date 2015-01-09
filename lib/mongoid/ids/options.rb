@@ -30,10 +30,6 @@ module Mongoid
         @options[:skip_finders]
       end
 
-      def override_to_param?
-        @options[:override_to_param]
-      end
-
       def pattern
         @options[:pattern] ||= \
         case @options[:contains].to_sym
@@ -69,8 +65,7 @@ module Mongoid
           :retry_count => 3,
           :contains => :alphanumeric,
           :field_name => :_id,
-          :skip_finders => false,
-          :override_to_param => true,
+          :skip_finders => false
         }.merge(options)
       end
     end

@@ -27,7 +27,6 @@ module Mongoid
           add_token_field_and_index(options)
 
           define_custom_finders(options) if options.skip_finders? == false
-          override_to_param(options) if options.override_to_param?
         end
       end
 
@@ -55,12 +54,6 @@ module Mongoid
 
         set_callback(:save, :before) do |document|
           document.create_token_if_nil options.field_name, options.pattern
-        end
-      end
-
-      def override_to_param(options)
-        self.send(:define_method, :to_param) do
-          self.send(options.field_name) || super()
         end
       end
     end
