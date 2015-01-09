@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path('../lib', __FILE__)
-require 'version'
+require 'mongoid/ids/version'
 
 Gem::Specification.new do |s|
   s.name        = 'mongoid-ids'
-  s.version     = MongoidIds::VERSION
+  s.version     = Mongoid::Ids::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Nicholas Bruning', 'Marcos Piccinini']
   s.homepage    = 'http://github.com/nofxx/mongoid-ids'
