@@ -1,6 +1,5 @@
 $: << File.expand_path("../../lib", __FILE__)
 
-require 'database_cleaner'
 require 'mongoid'
 require 'mongoid/ids'
 require 'benchmark'
@@ -8,8 +7,6 @@ require 'benchmark'
 Mongoid.configure do |config|
   config.connect_to("mongoid_ids_benchmark2")
 end
-
-DatabaseCleaner.strategy = :truncation
 
 # start benchmarks
 
