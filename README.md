@@ -1,16 +1,20 @@
-# Mongoid::Ids
-[![Code Climate](https://codeclimate.com/github/nofxx/mongoid-ids.png)](https://codeclimate.com/github/nofxx/mongoid-ids)
+Mongoid::Ids
+============
+
+[![Gem Version](https://badge.fury.io/rb/mongoid-ids.png)](http://badge.fury.io/rb/mongoid-ids)
 [![Dependency Status](https://gemnasium.com/nofxx/mongoid-ids.svg)](https://gemnasium.com/nofxx/mongoid-ids)
 [![Build Status](https://secure.travis-ci.org/nofxx/mongoid-ids.png)](http://travis-ci.org/nofxx/mongoid-ids)
+[![Code Climate](https://codeclimate.com/github/nofxx/mongoid-ids.png)](https://codeclimate.com/github/nofxx/mongoid-ids)
+[![Coverage Status](https://coveralls.io/repos/nofxx/mongoid-ids/badge.svg)](https://coveralls.io/r/nofxx/mongoid-ids)
 
 ## Mongoid::Token || Mongoid::Ids
 
-This gem is a fork that changes the default behaviour of original
-Mongoid::Token: instead of custom fields it changes _id by default.
-But you may still use tokens on custom fields.
+This gem is a fork that changes the original behaviour of Mongoid::Token:
+Instead of a custom field it changes the `_id` field by default.
+And you may still use tokens on custom fields.
 
 
-## Short snappy tokens for Mongoid documents
+## Short snappy token ids for Mongoid documents
 
 This library is a quick and simple way to generate unique, random ids
 for your mongoid documents, in the cases where you can't, or don't want
@@ -49,6 +53,9 @@ end
 And that's it! There's lots of configuration options too - which are all
 listed [below](#configuration). By default, the `token` method will
 create tokens 4 characters long, containing random alphanumeric characters.
+
+**Notice: Every Mongoid overriding has been removed (#find and #to_param).**
+
 
 ## Custom/Extra fields
 
@@ -214,8 +221,7 @@ token retry_count: 0
 
 # Notes
 
-This gem just changes the Mongoid::Token behaviour, use it if you don't
-need to change ids:
+This gem just changes the Mongoid::Token behaviour, which is found at:
 
 http://github.com/thetron/mongoid_token
 
