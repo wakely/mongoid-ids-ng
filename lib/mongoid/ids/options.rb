@@ -2,7 +2,7 @@ module Mongoid
   module Ids
     class Options
       def initialize(options = {})
-        @options = merge_defaults validate_options(options)
+        @options = merge_defaults options
       end
 
       def length
@@ -51,13 +51,6 @@ module Mongoid
       end
 
       private
-      def validate_options(options)
-        if options.has_key?(:retry)
-          STDERR.puts "Mongoid::Ids Deprecation Warning: option `retry` has been renamed to `retry_count`. `:retry` will be removed in v2.1"
-          options[:retry_count] = options[:retry]
-        end
-        options
-      end
 
       def merge_defaults(options)
         {
