@@ -185,24 +185,24 @@ describe Mongoid::Ids do
 
       describe 'pattern' do
         it 'should conform' do
-          document_class.send(:token, :token, :pattern => "%d%d%d%d%C%C%C%C")
+          document_class.send(:token, :token, :pattern => '%d%d%d%d%C%C%C%C')
           expect(document.token).to match(/[0-9]{4}[A-Z]{4}/)
         end
         context 'when there\'s a static prefix' do
           it 'should start with the prefix' do
-            document_class.send(:token, :token, :pattern => "PREFIX-%d%d%d%d")
+            document_class.send(:token, :token, :pattern => 'PREFIX-%d%d%d%d')
             expect(document.token).to match(/PREFIX\-[0-9]{4}/)
           end
         end
         context 'when there\'s an infix' do
           it 'should contain the infix' do
-            document_class.send(:token, :token, :pattern => "%d%d%d%d-INFIX-%d%d%d%d")
+            document_class.send(:token, :token, :pattern => '%d%d%d%d-INFIX-%d%d%d%d')
             expect(document.token).to match(/[0-9]{4}\-INFIX\-[0-9]{4}/)
           end
         end
         context 'when there\'s a suffix' do
           it 'should end with the suffix' do
-            document_class.send(:token, :token, :pattern => "%d%d%d%d-SUFFIX")
+            document_class.send(:token, :token, :pattern => '%d%d%d%d-SUFFIX')
             expect(document.token).to match(/[0-9]{4}\-SUFFIX/)
           end
         end
@@ -334,7 +334,7 @@ describe Mongoid::Ids do
           duplicate_name = 'Got Duped.'
           document_class.create!(name: duplicate_name)
           expect{ document_class.create!(name: duplicate_name) }
-            .to raise_exception(Moped::Errors::OperationFailure)
+            .to raise_exception(Mongo::Error::OperationFailure)
         end
       end
     end
@@ -388,7 +388,7 @@ describe Mongoid::Ids do
           duplicate_name = 'Got Duped.'
           document_class.create!(name: duplicate_name)
           expect{ document_class.create!(name: duplicate_name) }
-            .to raise_exception(Moped::Errors::OperationFailure)
+            .to raise_exception(Mongo::Error::OperationFailure)
         end
       end
     end

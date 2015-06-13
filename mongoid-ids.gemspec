@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.authors     = ['Nicholas Bruning', 'Marcos Piccinini']
   s.homepage    = 'http://github.com/nofxx/mongoid-ids'
   s.licenses    = ['MIT']
-  s.summary     = %q(A little random, unique token generator for Mongoid documents.)
-  s.description = %q(Mongoid token is a gem for creating random, unique tokens for mongoid documents. Highly configurable and great for making URLs a little more compact.)
+  s.summary     = 'A little random, unique id/token generator for Mongoid documents.'
+  s.description = 'Mongoid Ids creates random, unique tokens for mongoid documents. Highly configurable and great for making URLs a little more compact.'
 
   s.rubyforge_project = 'mongoid-ids'
   s.add_dependency 'mongoid', '> 4.0.0'

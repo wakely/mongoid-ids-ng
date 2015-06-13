@@ -1,12 +1,13 @@
 module Mongoid
   module Ids
+    # Resolve token/id collisions
     module Collisions
       def resolve_token_collisions(resolver)
         retries = resolver.retry_count
         begin
           yield
-        rescue Moped::Errors::OperationFailure => e
-          if is_duplicate_token_error?(e, self, resolver.field_name)
+        rescue Mongo::Error::OperationFailure => e
+          if duplicate_token_error?(e, self, resolver.field_name)
             if (retries -= 1) >= 0
               resolver.create_new_token_for(self)
               retry
@@ -23,10 +24,9 @@ module Mongoid
         raise Mongoid::Ids::CollisionRetriesExceeded.new(self, retry_count)
       end
 
-      def is_duplicate_token_error?(err, document, field_name)
-        [11000, 11001].include?(err.details['code']) &&
-          err.details['err'] =~ /dup key/ &&
-          err.details['err'] =~ /"#{document.send(field_name)}"/
+      def duplicate_token_error?(err, document, field_name)
+        err.message =~ /E1100[01] duplicate key/ &&
+          err.message =~ /"#{document.send(field_name)}"/
       end
     end
   end
