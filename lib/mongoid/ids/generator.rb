@@ -34,42 +34,45 @@ module Mongoid
           when 'w'
             alpha(length)
           when 'p'
-            "-"
+            '-'
           end
         end
       end
 
       private
+
       def self.rand_string_from_chars(chars, length = 1)
-        Array.new(length).map{ chars.sample }.join
+        Array.new(length).map { chars.sample }.join
       end
 
       def self.down_character(length = 1)
-        self.rand_string_from_chars ('a'..'z').to_a, length
+        rand_string_from_chars(('a'..'z').to_a, length)
       end
 
       def self.up_character(length = 1)
-        self.rand_string_from_chars ('A'..'Z').to_a, length
+        rand_string_from_chars(('A'..'Z').to_a, length)
       end
 
       def self.integer(length = 1)
-        (rand(10**length - 10**(length-1)) + 10**(length-1)).to_s
+        (rand(10**length - 10**(length - 1)) + 10**(length - 1)).to_s
       end
 
       def self.digits(length = 1)
-        rand(10**length).to_s.rjust(length, "0")
+        rand(10**length).to_s.rjust(length, '0')
       end
 
       def self.alpha(length = 1)
-        self.rand_string_from_chars (('A'..'Z').to_a + ('a'..'z').to_a), length
+        rand_string_from_chars(('A'..'Z').to_a + ('a'..'z').to_a, length)
       end
 
       def self.alphanumeric(length = 1)
-        (1..length).collect { (i = Kernel.rand(62); i += ((i < 10) ? 48 : ((i < 36) ? 55 : 61 ))).chr }.join
+        (1..length).collect do
+          (i = Kernel.rand(62); i += ((i < 10) ? 48 : ((i < 36) ? 55 : 61 ))).chr
+        end.join
       end
 
       def self.punctuation(length = 1)
-        self.rand_string_from_chars ['.','-','_','=','+','$'], length
+        rand_string_from_chars(['.', '-', '_', '=', '+', '$'], length)
       end
     end
   end

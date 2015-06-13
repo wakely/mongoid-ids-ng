@@ -7,6 +7,7 @@ require 'benchmark'
 Mongoid.configure do |config|
   config.connect_to("mongoid_ids_benchmark2")
 end
+Mongo::Logger.logger.level = Logger::INFO
 
 # start benchmarks
 
@@ -35,7 +36,7 @@ end
 Link.delete_all
 Link.create_indexes
 NoIdsLink.delete_all
-num_records = [1, 50, 100, 1000, 2000, 3000, 5000, 10000, 30000, 50000]
+num_records = [1, 50, 100, 1_000, 2_000, 3_000, 5_000, 10_000, 30_000, 50_000]
 puts "-- Alphanumeric token of length #{TOKEN_LENGTH} (#{62**TOKEN_LENGTH} possible tokens)"
 Benchmark.bm do |b|
   num_records.each do |qty|
