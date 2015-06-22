@@ -225,9 +225,13 @@ This gem just changes the Mongoid::Token behaviour, which is found at:
 
 http://github.com/thetron/mongoid_token
 
-If you find a problem, please [submit an issue](http://github.com/nofxx/mongoid-ids/issues) (and a failing test, if
-you can). Pull requests and feature requests are always welcome and
-greatly appreciated.
+If you find a problem, please
+[submit an issue](http://github.com/nofxx/mongoid-ids/issues)
+(and a failing test, if you can).
+
+Pull requests and feature requests are always welcome and greatly appreciated.
+
+Test matrix: Mongoid 4 & 5.
 
 Thanks to everyone that has contributed to this gem over the past year.
 Many, many thanks - you guys rawk.
