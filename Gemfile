@@ -4,6 +4,7 @@ gemspec
 
 group :test do
   gem 'guard'
+  gem 'rubocop'
   gem 'guard-rspec'
   gem 'guard-rubocop'
   gem 'rspec', '>= 3.2.0'
