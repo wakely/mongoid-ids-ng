@@ -12,18 +12,25 @@ require 'mongoid/ids'
 
 ENV['MONGOID_ENV'] = 'test'
 
+db_config = {
+  default: {
+    database: 'mongoid_urls_test',
+    hosts: ["localhost: #{ENV['MONGODB_PORT'] || 27_017}"],
+    options: {}
+  }
+}
+
 Mongoid.configure do |config|
   config.load_configuration(
-    clients: {
-      default: {
-        database: 'mongoid_ids_test',
-        hosts: ["localhost: #{ENV['BOXEN_MONGODB_PORT'] || 27_017}"],
-        options: {}
-      }
-    })
+    if Mongoid::VERSION >= '5'
+      { clients: db_config }
+    else
+      { sessions: db_config }
+    end
+  )
 end
 
-Mongo::Logger.logger.level = Logger::INFO
+Mongo::Logger.logger.level = Logger::INFO if Mongoid::VERSION >= '5'
 
 RSpec.configure do |config|
   config.include Mongoid::Matchers
