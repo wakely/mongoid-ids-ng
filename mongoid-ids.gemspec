@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.description = 'Mongoid Ids creates random, unique tokens for mongoid documents. Highly configurable and great for making URLs a little more compact.'
 
   s.rubyforge_project = 'mongoid-ids'
-  s.add_dependency 'mongoid', '> 4.0.0'
+  s.add_dependency 'mongoid', '>= 5.0.0.beta'
   s.add_dependency 'loofah', '> 2.0.0'
 
   s.files         = `git ls-files`.split("\n")
