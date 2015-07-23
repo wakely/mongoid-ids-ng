@@ -1,10 +1,10 @@
 Mongoid::Ids
 ============
 
-[![Gem Version](https://badge.fury.io/rb/mongoid-ids.png)](http://badge.fury.io/rb/mongoid-ids)
+[![Gem Version](https://badge.fury.io/rb/mongoid-ids.svg)](http://badge.fury.io/rb/mongoid-ids)
 [![Dependency Status](https://gemnasium.com/nofxx/mongoid-ids.svg)](https://gemnasium.com/nofxx/mongoid-ids)
-[![Build Status](https://secure.travis-ci.org/nofxx/mongoid-ids.png)](http://travis-ci.org/nofxx/mongoid-ids)
-[![Code Climate](https://codeclimate.com/github/nofxx/mongoid-ids.png)](https://codeclimate.com/github/nofxx/mongoid-ids)
+[![Build Status](https://secure.travis-ci.org/nofxx/mongoid-ids.svg)](http://travis-ci.org/nofxx/mongoid-ids)
+[![Code Climate](https://codeclimate.com/github/nofxx/mongoid-ids.svg)](https://codeclimate.com/github/nofxx/mongoid-ids)
 [![Coverage Status](https://coveralls.io/repos/nofxx/mongoid-ids/badge.svg)](https://coveralls.io/r/nofxx/mongoid-ids)
 
 ## Mongoid::Token || Mongoid::Ids
