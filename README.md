@@ -1,9 +1,10 @@
 Mongoid::Ids-Ng
 ============
 
-A fork of nofxx's excellent fork of thetron's excellent mongoid_token, gem.  Updated to remove deprecated 
-`alias_method_chain` calls, the solution for which I ripped off from ritxi's fork.  
-
+A fork of [nofxx's excellent fork](https://github.com/nofxx/mongoid-ids) of 
+[thetron's excellent gem](https://github.com/thetron/mongoid_token).  Updated to remove deprecated 
+`alias_method_chain` calls, the solution for which I ripped off from 
+[ritxi's other excellent fork](https://github.com/ritxi/mongoid_token).  
 
 [//]: # ([![Gem Version]&#40;https://badge.fury.io/rb/mongoid-ids.svg&#41;]&#40;http://badge.fury.io/rb/mongoid-ids&#41;)
 [//]: # ([![Dependency Status]&#40;https://gemnasium.com/nofxx/mongoid-ids.svg&#41;]&#40;https://gemnasium.com/nofxx/mongoid-ids&#41;)
@@ -11,7 +12,7 @@ A fork of nofxx's excellent fork of thetron's excellent mongoid_token, gem.  Upd
 [//]: # ([![Code Climate]&#40;https://codeclimate.com/github/nofxx/mongoid-ids.svg&#41;]&#40;https://codeclimate.com/github/nofxx/mongoid-ids&#41;)
 [//]: # ([![Coverage Status]&#40;https://coveralls.io/repos/nofxx/mongoid-ids/badge.svg&#41;]&#40;https://coveralls.io/r/nofxx/mongoid-ids&#41;)
 
-## Mongoid::Token || Mongoid::Ids-Ng
+## Mongoid::Token || Mongoid::Ids || Mongoid::Ids-Ng
 
 This gem is a fork that changes the original behaviour of Mongoid::Token:
 Instead of a custom field it changes the `_id` field by default.
