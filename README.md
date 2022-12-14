@@ -1,13 +1,17 @@
-Mongoid::Ids
+Mongoid::Ids-Ng
 ============
 
-[![Gem Version](https://badge.fury.io/rb/mongoid-ids.svg)](http://badge.fury.io/rb/mongoid-ids)
-[![Dependency Status](https://gemnasium.com/nofxx/mongoid-ids.svg)](https://gemnasium.com/nofxx/mongoid-ids)
-[![Build Status](https://secure.travis-ci.org/nofxx/mongoid-ids.svg)](http://travis-ci.org/nofxx/mongoid-ids)
-[![Code Climate](https://codeclimate.com/github/nofxx/mongoid-ids.svg)](https://codeclimate.com/github/nofxx/mongoid-ids)
-[![Coverage Status](https://coveralls.io/repos/nofxx/mongoid-ids/badge.svg)](https://coveralls.io/r/nofxx/mongoid-ids)
+A fork of nofxx's excellent fork of thetron's excellent mongoid_token, gem.  Updated to remove deprecated 
+`alias_method_chain` calls, the solution for which I ripped off from ritxi's fork.  
 
-## Mongoid::Token || Mongoid::Ids
+
+[//]: # ([![Gem Version]&#40;https://badge.fury.io/rb/mongoid-ids.svg&#41;]&#40;http://badge.fury.io/rb/mongoid-ids&#41;)
+[//]: # ([![Dependency Status]&#40;https://gemnasium.com/nofxx/mongoid-ids.svg&#41;]&#40;https://gemnasium.com/nofxx/mongoid-ids&#41;)
+[//]: # ([![Build Status]&#40;https://secure.travis-ci.org/nofxx/mongoid-ids.svg&#41;]&#40;http://travis-ci.org/nofxx/mongoid-ids&#41;)
+[//]: # ([![Code Climate]&#40;https://codeclimate.com/github/nofxx/mongoid-ids.svg&#41;]&#40;https://codeclimate.com/github/nofxx/mongoid-ids&#41;)
+[//]: # ([![Coverage Status]&#40;https://coveralls.io/repos/nofxx/mongoid-ids/badge.svg&#41;]&#40;https://coveralls.io/r/nofxx/mongoid-ids&#41;)
+
+## Mongoid::Token || Mongoid::Ids-Ng
 
 This gem is a fork that changes the original behaviour of Mongoid::Token:
 Instead of a custom field it changes the `_id` field by default.
